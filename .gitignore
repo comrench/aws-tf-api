@@ -1,1 +1,4 @@
-./tf/.terraform/*
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+*.terraform.lock.*
