@@ -1,15 +1,44 @@
-"""Python AWS Lambda Hello World Example
-   This example Lambda function will simply return 'Hello from Lambda!' and
-   a HTTP Status Code 200.
-"""
+import boto3
 
-import json
+client = boto3.client('dynamodb')
 
 
 def lambda_handler(event, context):
-    print("Starting Lambda")
-    print(event)
-    # return {
-    #     'statusCode': 200,
-    #     'body': json.dumps(event)
-    # }
+    print('starting lambda')
+    data = client.put_item(
+        TableName='myDB',
+        Item={
+            'id': {
+                'S': '005'
+            },
+            'price': {
+                'N': '500'
+            },
+            'name': {
+                'S': 'Smarty'
+            }
+        }
+    )
+
+    # data = client.get_item(
+    #     TableName='myDB',
+    #     Key={
+    #         'id': {
+    #           'S': '005'
+    #         }
+    #     }
+    #  )
+
+    print('done lambda')
+    print(data)
+
+   #  response = {
+   #      'statusCode': 200,
+   #      'body': 'successfully created item!',
+   #      'headers': {
+   #          'Content-Type': 'application/json',
+   #          'Access-Control-Allow-Origin': '*'
+   #      },
+   #  }
+
+   #  return response
